@@ -5,8 +5,9 @@ import { useSearchParams } from 'next/navigation';
 
 // Force dynamic rendering for this page
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
-function PlayerContent() {
+function PlayerRenderer() {
   const searchParams = useSearchParams();
   
   let fileUrl: string | null = null;
@@ -96,7 +97,7 @@ function LoadingFallback() {
 export default function PlayerPage() {
   return (
     <Suspense fallback={<LoadingFallback />}>
-      <PlayerContent />
+      <PlayerRenderer />
     </Suspense>
   );
 }

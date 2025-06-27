@@ -1,12 +1,5 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "functions": {
-    "app/player/page.tsx": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  "framework": "nextjs"
 }
