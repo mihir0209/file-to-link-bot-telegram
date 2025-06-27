@@ -3,11 +3,23 @@
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic';
+
 function PlayerContent() {
   const searchParams = useSearchParams();
-  const fileUrl = searchParams.get('url');
-  const fileName = searchParams.get('name') || 'Unknown File';
-  const fileType = searchParams.get('type') || '';
+  
+  let fileUrl: string | null = null;
+  let fileName: string = 'Unknown File';
+  let fileType: string = '';
+
+  try {
+    fileUrl = searchParams.get('url');
+    fileName = searchParams.get('name') || 'Unknown File';
+    fileType = searchParams.get('type') || '';
+  } catch (error) {
+    console.error('Error reading search params:', error);
+  }
 
   if (!fileUrl) {
     return (
@@ -25,9 +37,9 @@ function PlayerContent() {
   }
 
   const isVideo = fileType.startsWith('video/') || 
-                  fileUrl.match(/\.(mp4|webm|ogg|avi|mkv|mov)$/i);
+                  (fileUrl && fileUrl.match(/\.(mp4|webm|ogg|avi|mkv|mov)$/i) !== null);
   const isImage = fileType.startsWith('image/') || 
-                  fileUrl.match(/\.(jpg|jpeg|png|gif|webp|svg|bmp)$/i);
+                  (fileUrl && fileUrl.match(/\.(jpg|jpeg|png|gif|webp|svg|bmp)$/i) !== null);
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
