@@ -23,7 +23,7 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CDN_ACCESS_TOKEN = os.getenv("CDN_ACCESS_TOKEN")
 CDN_UPLOAD_URL = "https://upload.snapzion.com/api/public-upload"
-WEB_PLAYER_BASE = os.getenv("WEB_PLAYER_BASE", "http://localhost:3000/player")  # Update to your Vercel URL
+WEB_PLAYER_BASE = os.getenv("WEB_PLAYER_BASE", "https://filetolink-stream.vercel.app/player")  # Update to your Vercel URL
 
 # Navigation keyboard
 main_keyboard = ReplyKeyboardMarkup(
@@ -129,8 +129,6 @@ async def handle_file(update: Update, context: ContextTypes.DEFAULT_TYPE):
             buttons = [
                 [InlineKeyboardButton("⬇️ Direct Download", url=cdn_url)],
                 [InlineKeyboardButton("▶️ Watch Online", url=player_url)],
-                [InlineKeyboardButton("🎬 Open in MX Player (Android)", url=mxplayer_link)],
-                [InlineKeyboardButton("🎥 Open in Playit (Android)", url=playit_link)],
             ]
             markup = InlineKeyboardMarkup(buttons)
 
